@@ -1,0 +1,7 @@
+CREATE TABLE IF NOT EXISTS user(
+    id VARCHAR(36) NOT NULL PRIMARY KEY,
+    name VARCHAR(150) NOT NULL,
+    github_id INT UNIQUE,
+    login VARCHAR(100) NOT NULL,
+    avatar_url TEXT NOT NULL
+);
