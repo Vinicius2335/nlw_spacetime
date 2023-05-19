@@ -1,5 +1,6 @@
 package com.viniciusvieira.server.domain.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.*;
@@ -36,11 +37,12 @@ public class Memory {
     private boolean isPublic;
 
     @CreationTimestamp
-    @JsonProperty("created_at")
+    @JsonProperty(value = "created_at", access = JsonProperty.Access.READ_ONLY)
     private LocalDateTime createdAt;
 
-    @ManyToOne
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     @JsonProperty("user_id")
+    @JsonBackReference
     private User userId;
 }

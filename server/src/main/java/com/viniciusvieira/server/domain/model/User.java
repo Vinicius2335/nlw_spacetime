@@ -1,5 +1,6 @@
 package com.viniciusvieira.server.domain.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
@@ -25,11 +26,13 @@ public class User {
     @Column(columnDefinition = "VARCHAR(36)")
     @EqualsAndHashCode.Include
     private UUID id;
+
     private String name;
 
     @Embedded
     private Github github;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId", fetch = FetchType.LAZY)
+    @JsonManagedReference
     public List<Memory> memories = new ArrayList<>();
 }

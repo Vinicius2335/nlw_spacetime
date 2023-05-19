@@ -1,9 +1,12 @@
 package com.viniciusvieira.server.domain.service;
 
 import com.viniciusvieira.server.api.mapper.MemoryMapper;
+import com.viniciusvieira.server.api.representation.model.request.MemoryRequest;
 import com.viniciusvieira.server.api.representation.model.response.MemoryResponse;
 import com.viniciusvieira.server.domain.exception.MemoryNotFoundException;
+import com.viniciusvieira.server.domain.model.Github;
 import com.viniciusvieira.server.domain.model.Memory;
+import com.viniciusvieira.server.domain.model.User;
 import com.viniciusvieira.server.domain.repository.MemoryRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -17,9 +20,10 @@ import java.util.UUID;
 public class MemoryService {
     private final MemoryRepository memoryRepository;
     private final MemoryMapper memoryMapper;
+    private final CrudUserService crudUserService;
 
     public List<Memory> findAllMemories() {
-        return memoryRepository.findAll();
+        return memoryRepository.findAllOrderByDesc();
     }
 
     public Memory findMemoryById(UUID idMemory) {
@@ -28,16 +32,22 @@ public class MemoryService {
     }
 
     @Transactional
-    public MemoryResponse createNewMemory(Memory memory) {
+    public MemoryResponse createNewMemory(MemoryRequest memoryRequest, Github userGithubInfo) {
+        Memory memory = memoryMapper.toDomainMemory(memoryRequest);
         Memory memorySaved = memoryRepository.save(memory);
+
+        User userFound = crudUserService.findUserByGithubId(userGithubInfo.getId());
+        memorySaved.setUserId(userFound);
         return memoryMapper.toMemoryResponse(memorySaved);
     }
 
     @Transactional
-    public MemoryResponse updateMemoryById(UUID idMemory, Memory memory) {
+    public MemoryResponse updateMemoryById(UUID idMemory, MemoryRequest memoryRequest) {
+        Memory memoryToUpdate = memoryMapper.toDomainMemory(memoryRequest);
         Memory memoryFound = findMemoryById(idMemory);
-        memory.setId(memoryFound.getId());
-        Memory memoryUpdated = memoryRepository.save(memory);
+
+        memoryToUpdate.setId(memoryFound.getId());
+        Memory memoryUpdated = memoryRepository.save(memoryToUpdate);
         return memoryMapper.toMemoryResponse(memoryUpdated);
     }
 

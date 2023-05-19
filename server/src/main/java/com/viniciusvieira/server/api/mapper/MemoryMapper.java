@@ -1,5 +1,6 @@
 package com.viniciusvieira.server.api.mapper;
 
+import com.viniciusvieira.server.api.representation.model.request.MemoryRequest;
 import com.viniciusvieira.server.api.representation.model.response.MemoryResponse;
 import com.viniciusvieira.server.domain.model.Memory;
 import lombok.RequiredArgsConstructor;
@@ -13,5 +14,9 @@ public class MemoryMapper {
 
     public MemoryResponse toMemoryResponse(Memory memory){
         return modelMapper.map(memory, MemoryResponse.class);
+    }
+
+    public Memory toDomainMemory(MemoryRequest memoryRequest){
+        return modelMapper.map(memoryRequest, Memory.class);
     }
 }
