@@ -21,3 +21,6 @@
 
 - app -> page.tsx,
   - quando queremos criar algo centralizado na tela que tem o posicionamento absolute, usamos top-1/2 e -translate-y-1/2 translate-x-1/2
+
+- .env.local 
+  - todas as variaveis de ambiente que desejamos que seja expostas no front-end precisa começar com NEXT_PUBLIC
