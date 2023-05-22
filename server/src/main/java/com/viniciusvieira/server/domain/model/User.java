@@ -27,8 +27,6 @@ public class User {
     @EqualsAndHashCode.Include
     private UUID id;
 
-    private String name;
-
     @Embedded
     private Github github;
 

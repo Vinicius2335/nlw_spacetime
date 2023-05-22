@@ -21,10 +21,10 @@ import java.util.UUID;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api")
-@CrossOrigin(origins = "*", maxAge = 3600)
+//@CrossOrigin(origins = "*", maxAge = 3600)
 public class NlwSpacetimeController {
-    // TODO implementar o controller
     // TODO fazer exceptionHandler
+    // NOTE env. variable
     private final MemoryService memoryService;
 
     @GetMapping("/memories")
@@ -61,13 +61,13 @@ public class NlwSpacetimeController {
                 .body("Successfully deleted memory...");
     }
 
-    // BUG excluir depois
+    // TEST excluir depois, ou virar a rota register
     @GetMapping("/teste")
     public Github teste(){
         return getUserGithubInfo();
     }
 
-    //BUG excluir depois
+    // TEST excluir depois
     @GetMapping("/user")
     public Map<String, Object> getUser(OAuth2AuthenticationToken oAuth2AuthenticationToken) {
         return oAuth2AuthenticationToken.getPrincipal().getAttributes();
@@ -78,6 +78,7 @@ public class NlwSpacetimeController {
         Map<String, Object> userAttributes = userGithubInfo.getAttributes();
         return Github.builder()
                 .login(String.valueOf(userAttributes.get("login")))
+                .name(String.valueOf(userAttributes.get("name")))
                 .id(Integer.parseInt(String.valueOf(userAttributes.get("id"))))
                 .avatarUrl(String.valueOf(userAttributes.get("avatar_url")))
                 .build();

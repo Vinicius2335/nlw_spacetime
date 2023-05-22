@@ -20,6 +20,8 @@ public class Github {
 
     private String login;
 
+    private String name;
+
     @Column(name = "avatar_url")
     @JsonProperty("avatar_url")
     private String avatarUrl;

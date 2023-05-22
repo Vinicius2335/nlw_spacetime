@@ -1,9 +1,18 @@
+'use client'
+
+import { API } from '@/libs/axios'
 import { User } from 'lucide-react'
 
 export function Login() {
+  async function handleOnLogin() {
+    const registerResponse = await API.get('/teste')
+    const testeResponse = registerResponse.data
+    console.log(testeResponse)
+  }
+
   return (
-    <a
-      href={`http://github.com/login/oauth/authorize?client_id=${process.env.NEXT_PUBLIC_GITHUB_CLIENT_ID}`}
+    <button
+      onClick={handleOnLogin}
       className="flex items-center gap-3 text-left transition-colors hover:text-gray-50"
     >
       <div className="flex h-10 w-10  items-center justify-center rounded-full bg-gray-400">
@@ -13,6 +22,6 @@ export function Login() {
         <span className="underline underline-offset-2">Crie sua conta</span> e
         salve suas memórias
       </p>
-    </a>
+    </button>
   )
 }
