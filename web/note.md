@@ -5,3 +5,4 @@
 - `pnpm uninstall <dependencia>`
 - `pnpm add -D prettier-plugin-tailwindcss` - ordena as classes do tailwind numa ordem semantica
   - criar o arquivo prettier.config.js
+- `pnpm add lucide-react`
