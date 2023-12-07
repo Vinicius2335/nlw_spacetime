@@ -34,7 +34,7 @@ public class MemoryController {
      */
     @GetMapping("/{idMemory}")
     public ResponseEntity<Memory> getMemoryById(@PathVariable UUID idMemory){
-        return ResponseEntity.ok(memoryService.findyMemoryByIdOrThrows(idMemory));
+        return ResponseEntity.ok(memoryService.findyMemory(idMemory));
     }
 
     /**

@@ -22,8 +22,4 @@ public class MemoryRequest {
     private String content;
 
     private boolean isPublic;
-
-    // TODO - tem que sair depois - basta pegar o id do usuário logado
-    @NotNull(message = "UserId cannot be null")
-    private UUID userId;
 }
