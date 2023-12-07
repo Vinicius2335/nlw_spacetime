@@ -25,5 +25,5 @@
 # Erros
 
 - **error:** App.tsx: F:\Usuario\Documents\web\nlw_projects\nlw12_spacetime\mobile\App.tsx: Use process(css).then(cb) to work with async plugins
-- erro na versao do tailwind com o react-native na versao ^3.3.2
+- erro na versao do tailwind(3.3.6) com o react-native na versao maior que 3.3.2
 - **soluçao:** - `npm uninstall tailwindcss` -> `npm i -D tailwindcss@3.3.2`

@@ -1,13 +1,13 @@
 package com.github.vinicius2335.server.domain.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @AllArgsConstructor
@@ -25,4 +25,18 @@ public class User {
 
     @Column(nullable = false)
     private String name;
+
+    @Column(nullable = false)
+    private String email;
+
+    @Column(nullable = false)
+    private String password;
+
+    @Column(nullable = false)
+    private String avatarUrl;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    @Setter(AccessLevel.NONE)
+    @JsonIgnore
+    private List<Memory> memories = new ArrayList<>();
 }
