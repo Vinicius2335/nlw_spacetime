@@ -24,7 +24,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+    <html lang="pt-BR" data-lt-installed="true">
       <body
         className={`${roboto.variable} ${jamjuree.variable} bg-gray-900 font-sans text-gray-100`}
       >

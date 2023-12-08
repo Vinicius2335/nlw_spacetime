@@ -1,9 +1,14 @@
 import { Copyright } from '@/components/Copyright'
 import { EmptyMemories } from '@/components/EmptyMemories'
 import { Hero } from '@/components/Hero'
+import { Profile } from '@/components/Profile'
 import { SignIn } from '@/components/SignIn'
+import { cookies } from 'next/headers'
 
 export default function Home() {
+  // se o token existe dentro de cookies, significa que o usuário está autenticado
+  const isAuthenticated = cookies().has('token')
+
   return (
     <main className="grid min-h-screen grid-cols-2">
       {/* Esquerda */}
@@ -14,7 +19,7 @@ export default function Home() {
         {/* Stripes */}
         <div className="absolute bottom-0 right-1 top-0 w-2 bg-stripes" />
 
-        <SignIn />
+        {isAuthenticated ? <Profile /> : <SignIn />}
 
         <Hero />
 

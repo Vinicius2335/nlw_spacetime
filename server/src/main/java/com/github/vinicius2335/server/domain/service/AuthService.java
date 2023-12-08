@@ -53,6 +53,7 @@ public class AuthService {
         String roles = user.getRolesToString();
         claims.put("roles", roles);
         claims.put("name", user.getName());
+        claims.put("avatarUrl", user.getAvatarUrl());
         return claims;
     }
 
