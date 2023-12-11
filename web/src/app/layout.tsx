@@ -1,6 +1,6 @@
 /* eslint-disable camelcase */
 import type { Metadata } from 'next'
-import { Roboto_Flex, Bai_Jamjuree } from 'next/font/google'
+import { Bai_Jamjuree, Roboto_Flex } from 'next/font/google'
 import './globals.css'
 
 // Roboto_Flex se adapta ao font-bold

@@ -10,7 +10,7 @@ const config: Config = {
     extend: {
       fontFamily: {
         sans: 'var(--font-roboto)',
-        alt: 'var(--font-jamjuree)'
+        alt: 'var(--font-jamjuree)',
       },
 
       colors: {
@@ -53,22 +53,23 @@ const config: Config = {
       },
 
       blur: {
-        full: '194px'
+        full: '194px',
       },
 
       backgroundSize: {
-        stripes: '100% 8px'
+        stripes: '100% 8px',
       },
 
       backgroundImage: {
-        stripes: 'linear-gradient(to bottom, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1) 12.5%, transparent 12.5%, transparent)'
+        stripes:
+          'linear-gradient(to bottom, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1) 12.5%, transparent 12.5%, transparent)',
       },
 
       fontSize: {
-        '5xl': '2.5rem'
-      }
+        '5xl': '2.5rem',
+      },
     },
   },
-  plugins: [],
+  plugins: [require('@tailwindcss/forms')],
 }
 export default config
