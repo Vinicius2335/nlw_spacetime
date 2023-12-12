@@ -32,14 +32,16 @@ public class MemoryService {
         validateUserOrThrows(user);
 
         List<Memory> memories = memoryRepository.findAll(Sort.by(Sort.Direction.ASC, "createdAt"));
-        memories.stream()
-                .filter(memory -> memory.getUser().equals(user))
-                .forEach(memory -> {
-                    if (memory.getContent().length() > 115) {
-                        memory.setContent(memory.getContent().substring(0, 115).concat("..."));
-                    }
-                });
-        return memories;
+        List<Memory> memoriesByUser = memories.stream()
+                .filter(memory -> memory.getUser().getId().equals(user.getId()))
+                .toList();
+
+        memoriesByUser.forEach(memory -> {
+            if (memory.getContent().length() > 115) {
+                memory.setContent(memory.getContent().substring(0, 115).concat("..."));
+            }
+        });
+        return memoriesByUser;
     }
 
     /**

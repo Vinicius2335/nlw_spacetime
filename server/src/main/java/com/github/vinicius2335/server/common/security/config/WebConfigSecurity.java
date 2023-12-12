@@ -51,6 +51,8 @@ public class WebConfigSecurity {
                         authorize -> authorize
                                 .requestMatchers("/api/auth/**")
                                     .permitAll()
+                                .requestMatchers("/api/download/**")
+                                    .permitAll()
                                 .requestMatchers("/api/memories/**")
                                     .hasRole("USER")
                                 .anyRequest()

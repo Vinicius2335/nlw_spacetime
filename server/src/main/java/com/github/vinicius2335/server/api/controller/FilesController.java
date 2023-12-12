@@ -44,8 +44,11 @@ public class FilesController {
 
         String contentType;
 
-        if (Objects.requireNonNull(resource.getFilename()).endsWith(".png") ||
-                Objects.requireNonNull(resource.getFilename().endsWith(".jpeg"))){
+        if (
+                Objects.requireNonNull(resource.getFilename()).endsWith(".png") ||
+                        resource.getFilename().endsWith(".jpeg") ||
+                        resource.getFilename().endsWith(".jpg")
+        ){
             contentType = "image/jpeg";
         } else {
             contentType = "video/mp4";
