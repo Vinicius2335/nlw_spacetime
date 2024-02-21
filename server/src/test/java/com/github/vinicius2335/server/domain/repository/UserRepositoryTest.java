@@ -2,29 +2,22 @@ package com.github.vinicius2335.server.domain.repository;
 
 import com.github.vinicius2335.server.domain.model.User;
 import com.github.vinicius2335.server.util.UserCreator;
-import org.assertj.core.api.Assertions;
-import org.flywaydb.core.Flyway;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.test.context.ActiveProfiles;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 
 @DataJpaTest
+@ActiveProfiles("test")
 class UserRepositoryTest {
     @Autowired
     private UserRepository underTest;
 
-    private User user = UserCreator.mockUser();
-
-    @AfterEach
-    void tearDown() {
-        underTest.deleteAll();
-    }
+    private final User user = UserCreator.mockUser();
 
     @Test
     @DisplayName("save() save new user")
