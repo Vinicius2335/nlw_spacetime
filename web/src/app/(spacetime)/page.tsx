@@ -9,11 +9,12 @@ import { ArrowRight } from 'lucide-react'
 
 dayjs.locale(ptBr)
 
-interface Memory {
+export interface Memory {
   id: string
   coverUrl: string
   content: string
   createdAt: string
+  public: boolean
 }
 
 export default async function Home() {

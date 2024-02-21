@@ -56,8 +56,9 @@ public class MemoryService {
 
         Memory memoryFound = findyMemoryByIdOrThrows(idMemory);
 
-        if (!memoryFound.isPublic() && memoryFound.getUser() != user){
-            throw new BusinessRuleException("Erro interno...");
+        // !memoryFound.isPublic() &&
+        if (!memoryFound.getUser().getId().equals(user.getId())){
+            throw new BusinessRuleException("Erro interno ao tentar procurar uma memoria pelo id...");
         }
 
         return memoryFound;
@@ -93,7 +94,7 @@ public class MemoryService {
         Memory memoryFound = findyMemoryByIdOrThrows(idMemory);
 
         if (memoryFound.getUser() != user){
-            throw new BusinessRuleException("Erro interno...");
+            throw new BusinessRuleException("Erro interno ao tentar atualizar uma memória...");
         }
 
         Memory memoryToUpdate = memoryMapper.toMemory(request);
@@ -105,7 +106,7 @@ public class MemoryService {
     }
 
     private static void validateUserOrThrows(User user) {
-        if (user == null){
+        if (user.getId() == null){
             throw new BusinessRuleException("Erro interno...");
         }
     }
