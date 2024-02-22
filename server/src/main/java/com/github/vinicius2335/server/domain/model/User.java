@@ -43,7 +43,7 @@ public class User implements UserDetails {
     @Column(nullable = false)
     private String avatarUrl;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "user")
     @Setter(AccessLevel.NONE)
     @JsonIgnore
     private List<Memory> memories = new ArrayList<>();

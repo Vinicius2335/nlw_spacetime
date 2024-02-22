@@ -91,9 +91,14 @@ public class MemoryService {
         User user = ExtractEntityUtils.extractEntityFromContext();
         validateUserOrThrows(user);
 
+        // FIXME - Gambiarra
+        // Por algum motivo isVisibility de MemoryRequest sempre estava vindo false
+        // tive que mudar o campo de boolean para String
+        boolean isPublic = request.getIsPublic().equals("true");
+
         Memory memoryFound = findyMemoryByIdOrThrows(idMemory);
 
-        if (memoryFound.getUser() != user){
+        if (!memoryFound.getUser().getId().equals(user.getId())){
             throw new BusinessRuleException("Erro interno ao tentar atualizar uma memória...");
         }
 
@@ -101,6 +106,7 @@ public class MemoryService {
         memoryToUpdate.setId(memoryFound.getId());
         memoryToUpdate.setCreatedAt(memoryFound.getCreatedAt());
         memoryToUpdate.setUser(user);
+        memoryToUpdate.setPublic(isPublic);
 
         memoryRepository.saveAndFlush(memoryToUpdate);
     }

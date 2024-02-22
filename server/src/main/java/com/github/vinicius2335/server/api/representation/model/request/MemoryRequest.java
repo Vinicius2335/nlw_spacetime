@@ -17,5 +17,5 @@ public class MemoryRequest {
     @NotBlank(message = "Content cannot be null or empty")
     private String content;
 
-    private boolean isPublic;
+    private String isPublic;
 }
