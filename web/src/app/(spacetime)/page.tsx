@@ -29,6 +29,7 @@ export default async function Home() {
     headers: { Authorization: `Bearer ${token}` },
   })
   const memories: Memory[] = response.data
+  console.log(memories)
 
   if (memories.length === 0) {
     return <EmptyMemories />

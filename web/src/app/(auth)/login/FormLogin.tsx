@@ -4,6 +4,14 @@ import { api } from '@/lib/api'
 import { useRouter } from 'next/navigation'
 import { FormEvent, useRef } from 'react'
 import { setCookie } from 'cookies-next'
+import { Toaster, toast } from 'sonner'
+import { AxiosError } from 'axios'
+
+interface ErrorResponse {
+  error: string
+  message: string
+  status: number
+}
 
 export function FormLogin() {
   const router = useRouter()
@@ -35,8 +43,13 @@ export function FormLogin() {
       router.push('/')
       router.refresh()
     } catch (ex) {
-      // TODO - ERRO
-      console.error(ex)
+      const error = ex as AxiosError<ErrorResponse>
+
+      if (error.response?.data.status === 401) {
+        toast.error(error.response.data.message)
+        return
+      }
+      toast.error('Erro ao tentar realizar login, tente novamente.')
     }
   }
 
@@ -46,6 +59,8 @@ export function FormLogin() {
 
   return (
     <>
+      <Toaster richColors duration={2000} />
+
       <form className="space-y-6" onSubmit={handleOnSubmit}>
         <div>
           <label className="block text-sm font-medium leading-6">Email</label>

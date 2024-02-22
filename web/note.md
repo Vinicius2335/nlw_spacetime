@@ -11,4 +11,5 @@
   - criar o arquivo lib/auth.ts
 - `pnpm add -D @tailwindcss/forms`
   - em tailwind.config.ts -> plugin -> require('@tailwindcss/forms'),
+- `pnpm i @radix-ui/react-dialog`
 
