@@ -62,7 +62,7 @@ export default function FormEditMemory({ memory }: FormEditMemoryProps) {
         <textarea
           name="content"
           spellCheck={false}
-          className="scrollbar-thin scrollbar-track-transparent scrollbar-thumb-gray-100 scrollbar-track-rounded-full scrollbar-thumb-rounded-full h-44 w-full flex-1 resize-none overflow-y-auto rounded border-0 bg-transparent p-0 text-lg leading-relaxed text-gray-100 placeholder:text-gray-400 focus:ring-0"
+          className="scrollbar-track-rounded-full scrollbar-thumb-rounded-full h-44 w-full flex-1 resize-none overflow-y-auto rounded border-0 bg-transparent p-0 text-lg leading-relaxed text-gray-100 scrollbar-thin scrollbar-track-transparent scrollbar-thumb-gray-100 placeholder:text-gray-400 focus:ring-0"
           placeholder="Relatos sobre essa experiência que você quer lembrar para sempre."
           value={content}
           onChange={(e) => setContent(e.target.value)}

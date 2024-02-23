@@ -23,7 +23,7 @@ export function NewMemoryForm() {
     const formData = new FormData(event.currentTarget)
 
     // mostrando os valores do formulário
-    console.log(Array.from(formData.entries()))
+    // console.log(Array.from(formData.entries()))
 
     const fileToUpload = formData.get('coverUrl')
     let coverUrl = ''

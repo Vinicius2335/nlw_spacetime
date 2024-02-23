@@ -1,7 +1,7 @@
 import { api } from '@/lib/api'
 import dayjs from 'dayjs'
 import ptBr from 'dayjs/locale/pt-br'
-import { ArrowLeft, X } from 'lucide-react'
+import { ArrowLeft } from 'lucide-react'
 import { cookies } from 'next/headers'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -9,6 +9,7 @@ import { Memory } from '../../page'
 import CheckboxMemory from './CheckboxMemory'
 import DialogEditMemory from './DialogEditMemory'
 import { Toaster } from 'sonner'
+import { DialogRemoveMemory } from './DialogRemoveMemory'
 
 interface MemoryDetatilsProps {
   params: {
@@ -52,10 +53,7 @@ export default async function MemoryDetails({ params }: MemoryDetatilsProps) {
         </Link>
 
         <div className="flex items-center justify-center gap-2">
-          <button className="flex items-center justify-center gap-1 rounded-md bg-red-500 px-2 py-1.5 text-sm text-zinc-100 transition duration-300 ease-in-out hover:scale-110 hover:bg-red-600">
-            <X className="h-4 w-4" />
-            Remover
-          </button>
+          <DialogRemoveMemory idMemory={memory.id} />
 
           <DialogEditMemory memory={memory} />
         </div>

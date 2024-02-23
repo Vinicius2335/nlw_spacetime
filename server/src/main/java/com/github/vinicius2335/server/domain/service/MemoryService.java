@@ -127,7 +127,8 @@ public class MemoryService {
         validateUserOrThrows(user);
 
         Memory memoryToDelete = findyMemoryByIdOrThrows(idMemory);
-        memoryRepository.delete(memoryToDelete);
+
+        memoryRepository.customDelete(memoryToDelete.getId());
 
         try {
             FileDeleteUtils.deleteFile(memoryToDelete.getCoverUrl());
