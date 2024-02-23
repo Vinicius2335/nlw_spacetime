@@ -3,6 +3,7 @@ package com.github.vinicius2335.server.domain.service;
 import com.github.vinicius2335.server.api.mapper.MemoryMapper;
 import com.github.vinicius2335.server.api.representation.model.request.MemoryRequest;
 import com.github.vinicius2335.server.common.utils.ExtractEntityUtils;
+import com.github.vinicius2335.server.common.utils.FileDeleteUtils;
 import com.github.vinicius2335.server.domain.exception.BusinessRuleException;
 import com.github.vinicius2335.server.domain.exception.MemoryNotFoundException;
 import com.github.vinicius2335.server.domain.model.Memory;
@@ -13,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
 
@@ -56,7 +58,6 @@ public class MemoryService {
 
         Memory memoryFound = findyMemoryByIdOrThrows(idMemory);
 
-        // !memoryFound.isPublic() &&
         if (!memoryFound.getUser().getId().equals(user.getId())){
             throw new BusinessRuleException("Erro interno ao tentar procurar uma memoria pelo id...");
         }
@@ -66,7 +67,7 @@ public class MemoryService {
 
     private Memory findyMemoryByIdOrThrows(UUID idMemory) {
         return memoryRepository.findById(idMemory)
-                .orElseThrow(() -> new MemoryNotFoundException("Memory not found by id"));
+                .orElseThrow(() -> new MemoryNotFoundException("Memory not found by id..."));
     }
 
     /**
@@ -86,13 +87,18 @@ public class MemoryService {
         return memoryRepository.saveAndFlush(memoryToCreate);
     }
 
+    /**
+     * Atualiza uma memória
+     * @param idMemory id da memória que deve ser atualizado
+     * @param request campos alterados da nova memória
+     */
     @Transactional
     public void updateMemoryOrThrows(UUID idMemory, MemoryRequest request) {
         User user = ExtractEntityUtils.extractEntityFromContext();
         validateUserOrThrows(user);
 
         // FIXME - Gambiarra
-        // Por algum motivo isVisibility de MemoryRequest sempre estava vindo false
+        // Por algum motivo isPublic de MemoryRequest sempre estava vindo false
         // tive que mudar o campo de boolean para String
         boolean isPublic = request.getIsPublic().equals("true");
 
@@ -109,6 +115,25 @@ public class MemoryService {
         memoryToUpdate.setPublic(isPublic);
 
         memoryRepository.saveAndFlush(memoryToUpdate);
+    }
+
+    /**
+     * Remove uma memória
+     * @param idMemory id da memória que deve ser removida
+     */
+    @Transactional
+    public void removeMemory(UUID idMemory){
+        User user = ExtractEntityUtils.extractEntityFromContext();
+        validateUserOrThrows(user);
+
+        Memory memoryToDelete = findyMemoryByIdOrThrows(idMemory);
+        memoryRepository.delete(memoryToDelete);
+
+        try {
+            FileDeleteUtils.deleteFile(memoryToDelete.getCoverUrl());
+        } catch (IOException e) {
+            throw new BusinessRuleException("Error while try remove image from storage");
+        }
     }
 
     private static void validateUserOrThrows(User user) {

@@ -14,4 +14,13 @@ class RandomTest {
 
         Assertions.assertThat(devdojo).isNotEmpty();
     }
+
+    @Test
+    void extractFileCodeFromCoverUrl(){
+        String coverUrl = "/api/download/mWZaaPGT";
+        String fileCode = coverUrl.substring(14);
+        System.out.println(fileCode);
+
+        Assertions.assertThat(fileCode).isEqualTo("mWZaaPGT");
+    }
 }

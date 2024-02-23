@@ -64,5 +64,17 @@ public class MemoryController {
                 .build();
     }
 
-    // TODO - delete talvez
+    /**
+     * Endpoint responsável por remover uma memória
+     * @param idMemory id da memória
+     * @return response entity
+     */
+    @DeleteMapping("/{idMemory}")
+    public ResponseEntity<Void> removeMemory(@PathVariable UUID idMemory){
+        memoryService.removeMemory(idMemory);
+
+        return ResponseEntity
+                .noContent()
+                .build();
+    }
 }
