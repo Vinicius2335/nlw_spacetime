@@ -1,14 +1,12 @@
 package com.github.vinicius2335.server.common.utils;
 
-import org.springframework.core.io.UrlResource;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.stream.Stream;
 
-public  abstract class FileDeleteUtils {
+public abstract class FileDeleteUtils {
     public static void deleteFile(String coverUrl) throws IOException {
         String fileCode = coverUrl.substring(14);
 
